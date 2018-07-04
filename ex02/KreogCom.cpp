@@ -1,45 +1,58 @@
-#include <iostream>
-#include <string>
 #include "KreogCom.h"
 
-KreogCom::KreogCom(int x, int y, int serial):_serial(serial), _x(x), _y(y)
+KreogCom::KreogCom(int x, int y, int serial) :
+    _next(NULL), _x(x), _y(y), m_serial(serial)
 {
-  _link = 0;
-  std::cout << "KreogCom " << _serial << " initialised" << std::endl;
-  
+    std::cout << "KreogCom " << m_serial << " initialised" << std::endl;
 }
 
 KreogCom::~KreogCom()
 {
-  std::cout << "KreogCom " << _serial << " shutting down" << std::endl;
+    std::cout << "KreogCom " << m_serial << " shutting down" << std::endl;
 }
 
-void KreogCom::addCom(int x, int y, int serial){
-  KreogCom *tmp = new KreogCom(x, y, serial);
-  tmp->_link = _link;
-  _link = tmp;
-  
-}
-
-KreogCom *KreogCom::getCom()
+void KreogCom::addCom(int x, int y, int serial)
 {
-  return this->_link;
+    KreogCom* elem = new KreogCom(x, y, serial);
+    if (!_next)
+        _next = elem;
+    else
+    {
+        elem->_next = _next;
+        _next = elem;
+    }
 }
+
+KreogCom* KreogCom::getCom()
+{
+    return _next;
+}
+
 void KreogCom::removeCom()
 {
-  if (_link == 0) return;
-  KreogCom *save = _link;
-  _link = _link->_link;
-  delete save;
+    if (!_next)
+        return;
+    if (_next->_next)
+    {
+        KreogCom* tmp = _next;
+        _next = _next->_next;
+        delete tmp;
+    }
+    else
+    {
+        delete _next;
+        _next = NULL;
+    }
 }
 
 void KreogCom::ping() const
 {
-  std::cout << "KreogCom " << _serial << " currently at " << _x << " " << _y << std::endl << std::flush;
+    std::cout << "KreogCom " << m_serial << " currently at " << _x << " " << _y << std::endl;
 }
 
 void KreogCom::locateSquad() const
 {
-    if (_link != 0) _link->locateSquad();
-  ping();
+    for (KreogCom* itr = _next; itr != NULL; itr = itr->getCom())
+        itr->ping();
+    ping();
 }
