@@ -47,13 +47,13 @@ void Phaser::changeType(AmmoType newType)
 {
 	switch (newType) {
 	case REGULAR:
-		std::cout << "Switching ammo to type: regular" << std::endl;
+		std::cout << "Switching ammo to type : regular" << std::endl;
 		break;
 	case PLASMA:
-		std::cout << "Switching ammo to type: plasma" << std::endl;
+		std::cout << "Switching ammo to type : plasma" << std::endl;
 		break;
 	case ROCKET:
-		std::cout << "Switching ammo to type: rocket" << std::endl;
+		std::cout << "Switching ammo to type : rocket" << std::endl;
 		break;
 	}
 	this->_defaultType = newType;
@@ -61,7 +61,7 @@ void Phaser::changeType(AmmoType newType)
 
 void Phaser::reload()
 {
-	std::cout << "Reloading..." << std::endl;
+	std::cout << "Reloading ..." << std::endl;
 	while ((int)this->_ammos.size() < this->_maxAmmo)
 		this->_ammos.push(this->_defaultType);
 }
