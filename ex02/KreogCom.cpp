@@ -43,7 +43,7 @@ void KreogCom::removeCom()
 
 void KreogCom::ping() const
 {
-	if (this)
+	//if (this)
 		std::cout << "KreogCom " << this->m_serial << " currently at " << this->my_x << " " << this->my_y  << std::endl;
 }
 
