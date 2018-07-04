@@ -16,8 +16,32 @@ Phaser::~Phaser()
 
 void	Phaser::fire()
 {
-	std::cout << "Clip empty, please reload" << std::endl;
+	std::string src("");
+	if(this->bullet == Empty)
+		std::cout << "Clip empty, please reload" << std::endl;
+	return;
+	
+	if (_type == REGULAR)
+		src = "regular";
+	else if (_type == PLASMA)
+		src = "plasma";
+	else if (_type == ROCKET)
+		src = "rocket";
+	std::cout << src << std::endl;
 }
+/*
+void Phaser::fire(){
+  if (_magazine[_cur] == Empty){
+    std::cout << "Clip empty, please reload" << std::endl;
+    return;
+  }
+  _magazine[_cur]--;
+  std::string un = Sounds::Regular;
+  if (_cur == REGULAR) std::cout << un << std::endl;
+  else if (_cur == PLASMA) std::cout << Sounds::Plasma << std::endl;
+  else if (_cur == ROCKET) std::cout << Sounds::Rocket << std::endl;
+}*/
+
 
 void Phaser::ejectClip()
 {
