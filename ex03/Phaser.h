@@ -3,28 +3,31 @@
 
 #include <string>
 #include <iostream>
+#include <queue>
 
-class Phaser
-{
-	public:
-		enum AmmoType {REGULAR, PLASMA, ROCKET};
+class Phaser {
+public:
+	enum AmmoType {
+		REGULAR,
+		PLASMA,
+		ROCKET
+	};
 
-	private:
-		AmmoType _type;
-		int maxAmmo;
-		int bullet;
+	Phaser(int maxAmmo = 20, AmmoType type = REGULAR);
+	~Phaser();
 
-	public:
-		Phaser(int maxAmmo = 20, AmmoType type = REGULAR);
-		~Phaser();
+	void fire();
+	void ejectClip();
+	void changeType(AmmoType newType);
+	void reload();
+	void addAmmo(AmmoType type);
 
-		void fire();
-		void ejectClip();
-		void changeType(AmmoType newType);
-		void reload();
-		void addAmmo(AmmoType type);
-		int getCurrentAmmos();
-		static const int Empty = 0;
+	int getCurrentAmmos() const;
+
+private:
+	int _maxAmmo;
+	AmmoType _defaultType;
+	std::queue<AmmoType> _ammos;
 };
 
 #endif
