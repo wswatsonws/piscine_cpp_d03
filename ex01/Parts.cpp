@@ -29,9 +29,9 @@ Legs::~Legs(){
 
 void Legs::informations() const{
     if (this->_func)
-		std::cout << "\t[Parts] Legs " << this->_serial << " status : KO" <<std::endl;
-	else
 		std::cout << "\t[Parts] Legs " << this->_serial << " status : OK" <<std::endl;
+	else
+		std::cout << "\t[Parts] Legs " << this->_serial << " status : KO" <<std::endl;
 }
 
 
