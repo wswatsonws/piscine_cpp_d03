@@ -17,7 +17,7 @@ class Legs{
   bool _func;
   std::string _serial;
  public:
-  Legs(std::string serial = "L-01", bool f = true);
+  Legs(std::string serial = "L-01", bool f = false);
   ~Legs();
   void informations() const;
   bool isFunctionnal() const{return _func;};
